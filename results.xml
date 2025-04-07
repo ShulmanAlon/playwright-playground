@@ -1,0 +1,11 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="9.070592999999993">
+<testsuite name="login.spec.ts" timestamp="2025-04-07T18:49:15.130Z" hostname="firefox" tests="1" failures="0" skipped="0" time="7.41" errors="0">
+<testcase name="login › Successful login" classname="login.spec.ts" time="7.41">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/login-login-Successful-login-firefox/trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

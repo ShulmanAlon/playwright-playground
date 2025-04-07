@@ -1,0 +1,16 @@
+stages:
+  - test
+
+test_playwright:
+  image: mcr.microsoft.com/playwright:v1.51.1-jammy
+  stage: test
+  script:
+    - npm ci
+    - npx playwright install --with-deps
+    - npx playwright test
+  artifacts:
+    when: always
+    paths:
+      - playwright-report/
+    reports:
+      junit: results.xml
