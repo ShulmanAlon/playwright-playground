@@ -5,3 +5,19 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Node
+node_modules/
+dist/
+*.log
+.env
+playwright-report/
+test-results/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
