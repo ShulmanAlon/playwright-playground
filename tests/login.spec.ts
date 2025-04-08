@@ -5,8 +5,9 @@ import { MainPage } from '../pages/MainPage';
 
 test.describe('login', () => {
   test.beforeEach(async ({ page }) => {
-    // open browser and navigate to starting url
-    await page.goto('');
+    await test.step('open browser and navigate to starting url', async () => {
+      await page.goto('');
+    });
   });
 
   test('Successful login', async ({ page }) => {
