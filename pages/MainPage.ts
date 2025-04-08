@@ -15,6 +15,32 @@ export class MainPage {
     await this.loginSignupButton.click();
   }
 
+  async verifyLanding() {
+    // using ARIA snapshot
+
+    await expect(this.page.locator('#header')).toMatchAriaSnapshot(`
+    - link "Website for automation practice":
+      - img "Website for automation practice"
+    - list:
+      - listitem:
+        - link " Home"
+      - listitem:
+        - link " Products"
+      - listitem:
+        - link " Cart"
+      - listitem:
+        - link " Signup / Login"
+      - listitem:
+        - link " Test Cases"
+      - listitem:
+        - link " API Testing"
+      - listitem:
+        - link " Video Tutorials"
+      - listitem:
+        - link " Contact us"
+    `);
+  }
+
   async verifySignedIn(userName: string) {
     await expect(
       this.page.getByRole('link', { name: ' Logout' })

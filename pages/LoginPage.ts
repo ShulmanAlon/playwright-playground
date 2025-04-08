@@ -17,7 +17,7 @@ export class LoginPage {
   }
 
   async verifyLanding() {
-    await expect(this.page).toHaveURL('login'); // move to static
+    await expect(this.page).toHaveURL('login'); // TODO: move to static
     await expect(
       this.page.getByRole('heading', { name: 'Login to your account' })
     ).toBeVisible();

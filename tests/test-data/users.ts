@@ -5,5 +5,5 @@ export const loginUsers = {
 };
 
 export const signUpUsers = {
-  // completeProfileUser: new User() // TODO - add optional properties to class
+  // completeProfileUser: new User() // TODO: add optional properties to class
 };

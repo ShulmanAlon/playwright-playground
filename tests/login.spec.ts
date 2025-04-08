@@ -14,6 +14,7 @@ test.describe('login', () => {
     const mainPage = new MainPage(page);
     const loginPage = new LoginPage(page);
 
+    await mainPage.verifyLanding();
     await mainPage.clickOnLoginSignup();
     await loginPage.verifyLanding();
     await loginPage.login(validUser.email, validUser.password);
