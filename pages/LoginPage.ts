@@ -16,12 +16,12 @@ export class LoginPage {
     this.loginButton = this.page.getByRole('button', { name: 'Login' });
   }
 
-  verifyLanding() {
-    expect(this.page).toHaveURL('login'); // move to static
-    expect(
+  async verifyLanding() {
+    await expect(this.page).toHaveURL('login'); // move to static
+    await expect(
       this.page.getByRole('heading', { name: 'Login to your account' })
     ).toBeVisible();
-    expect(
+    await expect(
       this.page.getByRole('heading', { name: 'New User Signup!' })
     ).toBeVisible();
   }

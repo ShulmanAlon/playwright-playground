@@ -15,11 +15,18 @@ export class MainPage {
     await this.loginSignupButton.click();
   }
 
-  verifySignedIn() {
+  async verifySignedIn() {
     // TODO - not working, will work if manually wait in debug
-    expect(this.page.getByRole('link', { name: ' Logout' })).toBeVisible();
-    expect(
+    await expect(
+      this.page.getByRole('link', { name: ' Logout' })
+    ).toBeVisible();
+    await expect(
       this.page.getByRole('link', { name: ' Delete Account' })
+    ).toBeVisible();
+    await expect(
+      this.page
+        .getByRole('listitem')
+        .filter({ hasText: 'Logged in as test user' })
     ).toBeVisible();
   }
 }
