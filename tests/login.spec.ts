@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
-import { users } from './test-data/users';
+import { loginUsers } from './test-data/users';
 import { MainPage } from '../pages/MainPage';
 
 test.describe('login', () => {
@@ -10,13 +10,13 @@ test.describe('login', () => {
   });
 
   test('Successful login', async ({ page }) => {
-    const validUser = users.valid_user;
+    const validUser = loginUsers.validUser;
     const mainPage = new MainPage(page);
     const loginPage = new LoginPage(page);
 
     await mainPage.clickOnLoginSignup();
     await loginPage.verifyLanding();
     await loginPage.login(validUser.email, validUser.password);
-    await mainPage.verifySignedIn();
+    await mainPage.verifySignedIn(validUser.fullName);
   });
 });

@@ -1,8 +1,9 @@
-export const users = {
-  valid_user: {
-    email: 'test_user_159753@test.com',
-    password: 'abc123',
-    firstName: 'Test',
-    lastName: 'User',
-  },
+import { User } from './User';
+
+export const loginUsers = {
+  validUser: new User('test_user_159753@test.com', 'abc123', 'Test', 'User'),
+};
+
+export const signUpUsers = {
+  // completeProfileUser: new User() // TODO - add optional properties to class
 };
