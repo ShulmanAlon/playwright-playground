@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
+import { User } from '../test-data/User';
 
 export class LoginPage {
   readonly page: Page;
@@ -26,9 +27,9 @@ export class LoginPage {
     ).toBeVisible();
   }
 
-  async login(userName: string, password: string) {
-    await this.signupEmailInput.fill(userName);
-    await this.passwordInput.fill(password);
+  async login(user: User) {
+    await this.signupEmailInput.fill(user.email);
+    await this.passwordInput.fill(user.password);
     await this.loginButton.click();
   }
 }

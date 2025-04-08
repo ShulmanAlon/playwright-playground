@@ -1,4 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
+import { User } from '../test-data/User';
 
 export class MainPage {
   readonly page: Page;
@@ -41,7 +42,7 @@ export class MainPage {
     `);
   }
 
-  async verifySignedIn(userName: string) {
+  async verifySignedIn(user: User) {
     await expect(
       this.page.getByRole('link', { name: ' Logout' })
     ).toBeVisible();
@@ -51,7 +52,7 @@ export class MainPage {
     await expect(
       this.page
         .getByRole('listitem')
-        .filter({ hasText: `Logged in as ${userName}` })
+        .filter({ hasText: `Logged in as ${user.fullName}` })
     ).toBeVisible();
   }
 }
