@@ -1,6 +1,0 @@
-<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="5.066184000000358">
-<testsuite name="login.spec.ts" timestamp="2025-04-08T06:06:01.769Z" hostname="chromium" tests="1" failures="0" skipped="0" time="4.2" errors="0">
-<testcase name="login › Successful login" classname="login.spec.ts" time="4.2">
-</testcase>
-</testsuite>
-</testsuites>
