@@ -6,6 +6,7 @@ import { User } from '../test-data/User';
 type MyFixtures = {
   mainPage: MainPage;
   loginPage: LoginPage;
+  openMain: () => Promise<void>;
   loginFlow: (user: User) => Promise<void>;
 };
 
@@ -17,6 +18,13 @@ export const test = baseTest.extend<MyFixtures>({
   loginPage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
     await use(loginPage);
+  },
+  openMain: async ({ page }, use) => {
+    await use(async () => {
+      await test.step('open browser and navigate to starting url', async () => {
+        await page.goto('/');
+      });
+    });
   },
   loginFlow: async ({ mainPage, loginPage }, use) => {
     await use(async (user: User) => {
