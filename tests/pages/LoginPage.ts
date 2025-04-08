@@ -32,4 +32,10 @@ export class LoginPage {
     await this.passwordInput.fill(user.password);
     await this.loginButton.click();
   }
+
+  async verifyInvalidLogin() {
+    await expect(this.page.locator('#form')).toMatchAriaSnapshot(
+      `- paragraph: Your email or password is incorrect!`
+    );
+  }
 }
