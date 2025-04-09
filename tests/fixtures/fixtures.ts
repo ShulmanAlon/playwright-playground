@@ -1,43 +1,28 @@
 import { test as baseTest } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
-import { MainPage } from '../pages/MainPage';
+import { InventoryPage } from '../pages/InventoryPage';
 import { User } from '../test-data/User';
 
 type MyFixtures = {
-  mainPage: MainPage;
   loginPage: LoginPage;
-  openMain: () => Promise<void>;
+  inventoryPage: InventoryPage;
   loginFlow: (user: User) => Promise<void>;
 };
 
 export const test = baseTest.extend<MyFixtures>({
-  mainPage: async ({ page }, use) => {
-    const mainPage = new MainPage(page);
-    await use(mainPage);
-  },
   loginPage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
     await use(loginPage);
   },
-  openMain: async ({ page }, use) => {
-    await use(async () => {
-      await test.step('open browser and navigate to starting url', async () => {
-        await page.goto('/');
-      });
-    });
+  inventoryPage: async ({ page }, use) => {
+    const inventoryPage = new InventoryPage(page);
+    await use(inventoryPage);
   },
-  loginFlow: async ({ mainPage, loginPage }, use) => {
+  loginFlow: async ({ loginPage, inventoryPage }, use) => {
     await use(async (user: User) => {
-      await test.step('Verify landing in main page, click on login', async () => {
-        await mainPage.verifyLanding();
-        await mainPage.clickOnLoginSignup();
-      });
-      await test.step('Verify landing in login page, fill valid user data and click to sign in', async () => {
+      await test.step('Verify landing in login page, fill user data and click to sign in', async () => {
         await loginPage.verifyLanding();
         await loginPage.login(user);
-      });
-      await test.step('Verify landing in main page and that user is signed in', async () => {
-        await mainPage.verifySignedIn(user);
       });
     });
   },

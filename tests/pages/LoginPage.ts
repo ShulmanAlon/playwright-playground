@@ -3,39 +3,39 @@ import { User } from '../test-data/User';
 
 export class LoginPage {
   readonly page: Page;
-  readonly signupEmailInput: Locator;
+  readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.signupEmailInput = this.page
-      .locator('form')
-      .filter({ hasText: 'Login' })
-      .getByPlaceholder('Email Address');
-    this.passwordInput = this.page.getByRole('textbox', { name: 'Password' });
-    this.loginButton = this.page.getByRole('button', { name: 'Login' });
+    this.usernameInput = this.page.locator('[data-test="username"]');
+    this.passwordInput = this.page.locator('[data-test="password"]');
+    this.loginButton = this.page.locator('[data-test="login-button"]');
   }
 
   async verifyLanding() {
-    await expect(this.page).toHaveURL('login'); // TODO: move to static
-    await expect(
-      this.page.getByRole('heading', { name: 'Login to your account' })
-    ).toBeVisible();
-    await expect(
-      this.page.getByRole('heading', { name: 'New User Signup!' })
-    ).toBeVisible();
+    await expect(this.page.locator('#root')).toMatchAriaSnapshot(
+      `- text: Swag Labs`
+    );
+    await expect(this.page.locator('#login_button_container'))
+      .toMatchAriaSnapshot(`
+      - textbox "Username"
+      - textbox "Password"
+      - button "Login"
+      `);
   }
 
   async login(user: User) {
-    await this.signupEmailInput.fill(user.email);
+    await this.usernameInput.fill(user.userName);
     await this.passwordInput.fill(user.password);
     await this.loginButton.click();
   }
 
   async verifyInvalidLogin() {
-    await expect(this.page.locator('#form')).toMatchAriaSnapshot(
-      `- paragraph: Your email or password is incorrect!`
-    );
+    await expect(this.page.locator('form')).toMatchAriaSnapshot(`
+      - 'heading "Epic sadface: Username and password do not match any user in this service" [level=3]':
+        - button
+      `);
   }
 }
