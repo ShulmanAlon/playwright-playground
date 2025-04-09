@@ -1,5 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { User } from '../test-data/User';
+import { step } from '../decorators/step';
 
 export class InventoryPage {
   readonly page: Page;
@@ -20,6 +21,7 @@ export class InventoryPage {
     });
   }
 
+  @step()
   async verifyLanding() {
     // using ARIA snapshot
     await expect(
@@ -36,6 +38,7 @@ export class InventoryPage {
     `);
   }
 
+  @step()
   async verifySignedIn() {
     await this.burgerMenuButton.click();
     await expect(this.logoutMenuButton).toBeVisible();

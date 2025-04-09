@@ -1,5 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { User } from '../test-data/User';
+import { step } from '../decorators/step';
 
 export class LoginPage {
   readonly page: Page;
@@ -14,6 +15,7 @@ export class LoginPage {
     this.loginButton = this.page.locator('[data-test="login-button"]');
   }
 
+  @step()
   async verifyLanding() {
     await expect(this.page.locator('#root')).toMatchAriaSnapshot(
       `- text: Swag Labs`
@@ -26,12 +28,14 @@ export class LoginPage {
       `);
   }
 
+  @step()
   async login(user: User) {
     await this.usernameInput.fill(user.userName);
     await this.passwordInput.fill(user.password);
     await this.loginButton.click();
   }
 
+  @step()
   async verifyInvalidLogin() {
     await expect(this.page.locator('form')).toMatchAriaSnapshot(`
       - 'heading "Epic sadface: Username and password do not match any user in this service" [level=3]':

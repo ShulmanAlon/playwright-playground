@@ -10,9 +10,7 @@ test.describe('login', () => {
 
   test('Successful login', async ({ loginFlow, inventoryPage }) => {
     await loginFlow(loginUsers.validUser);
-    await test.step('Verify landing in inventory page and that user is signed in', async () => {
-      await inventoryPage.verifySignedIn();
-    });
+    await inventoryPage.verifySignedIn();
   });
 
   test('Invalid user login', async ({ loginFlow, loginPage }) => {

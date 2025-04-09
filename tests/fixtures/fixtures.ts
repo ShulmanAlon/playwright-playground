@@ -20,10 +20,8 @@ export const test = baseTest.extend<MyFixtures>({
   },
   loginFlow: async ({ loginPage, inventoryPage }, use) => {
     await use(async (user: User) => {
-      await test.step('Verify landing in login page, fill user data and click to sign in', async () => {
-        await loginPage.verifyLanding();
-        await loginPage.login(user);
-      });
+      await loginPage.verifyLanding();
+      await loginPage.login(user);
     });
   },
 });
