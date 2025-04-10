@@ -4,12 +4,19 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { User } from '../test-data/User';
 
 type MyFixtures = {
+  openBasePage: void;
   loginPage: LoginPage;
   inventoryPage: InventoryPage;
   loginFlow: (user: User) => Promise<void>;
 };
 
 export const test = baseTest.extend<MyFixtures>({
+  openBasePage: async ({ page }, use) => {
+    await test.step('open browser and navigate to starting url', async () => {
+      await page.goto('/');
+    });
+    await use();
+  },
   loginPage: async ({ page }, use) => {
     const loginPage = new LoginPage(page);
     await use(loginPage);
@@ -18,8 +25,9 @@ export const test = baseTest.extend<MyFixtures>({
     const inventoryPage = new InventoryPage(page);
     await use(inventoryPage);
   },
-  loginFlow: async ({ loginPage, inventoryPage }, use) => {
+  loginFlow: async ({ loginPage, openBasePage }, use) => {
     await use(async (user: User) => {
+      void openBasePage;
       await loginPage.verifyLanding();
       await loginPage.login(user);
     });
