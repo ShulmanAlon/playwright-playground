@@ -27,11 +27,6 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Debug ENV VARS
-        run: |
-          echo "BASE_URL=$BASE_URL"
-          echo "API_BASE_URL=$API_BASE_URL"
-
       - name: Run Playwright tests
         run: npx playwright test
 
