@@ -1,5 +1,5 @@
-import { test } from '../../fixtures/fixtures';
-import { loginUsers } from '../../test-data/users';
+import { test } from '../../common/fixtures/fixtures';
+import { loginUsers } from '../test-data/users';
 
 test.describe('login tests', () => {
   test('Successful login', async ({ loginFlow, inventoryPage }) => {

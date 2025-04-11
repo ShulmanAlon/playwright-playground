@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { test, expect } from '../../fixtures/fixtures';
-import { step } from '../../decorators/step';
+import { test, expect } from '../../common/fixtures/fixtures';
+import { step } from '../../common/decorators/step';
 
 const apiBase = process.env.API_BASE_URL!;
 

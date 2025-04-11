@@ -1,6 +1,6 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { User } from '../test-data/User';
-import { step } from '../decorators/step';
+import { step } from '../../common/decorators/step';
 
 export class LoginPage {
   readonly page: Page;

@@ -1,6 +1,6 @@
-import { LoginPage } from '../pages/LoginPage';
-import { InventoryPage } from '../pages/InventoryPage';
-import { User } from '../test-data/User';
+import { LoginPage } from '../ui/pages/LoginPage';
+import { InventoryPage } from '../ui/pages/InventoryPage';
+import { User } from '../ui/test-data/User';
 // import { Page, APIRequestContext } from '@playwright/test';
 
 export type MyFixtures = {
