@@ -16,6 +16,23 @@ export class LoginPage {
   }
 
   @step()
+  async fillCredentials(user: User) {
+    await this.usernameInput.fill(user.username);
+    await this.passwordInput.fill(user.password);
+  }
+
+  @step()
+  async submit() {
+    await this.loginButton.click();
+  }
+
+  @step()
+  async login(user: User) {
+    await this.fillCredentials(user);
+    await this.submit();
+  }
+
+  @step()
   async verifyLanding() {
     await expect(this.page.locator('#root')).toMatchAriaSnapshot(
       `- text: Swag Labs`
@@ -26,13 +43,6 @@ export class LoginPage {
       - textbox "Password"
       - button "Login"
       `);
-  }
-
-  @step()
-  async login(user: User) {
-    await this.usernameInput.fill(user.userName);
-    await this.passwordInput.fill(user.password);
-    await this.loginButton.click();
   }
 
   @step()

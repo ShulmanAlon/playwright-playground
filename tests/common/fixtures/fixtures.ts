@@ -1,10 +1,15 @@
-import { test as baseTest, expect } from '@playwright/test';
+import { test as base, expect, Page } from '@playwright/test';
+import { LoginPage } from '../../ui/pages/LoginPage';
+import { InventoryPage } from '../../ui/pages/InventoryPage';
 import { uiFixtures } from '../../ui/fixtures/ui-fixtures';
-import { apiFixtures } from '../../api/fixtures/api-fixtures';
-import { MyFixtures } from '../types';
 
-export const test = baseTest.extend<MyFixtures>({
+type MyFixtures = {
+  loginPage: LoginPage;
+  inventoryPage: InventoryPage;
+};
+
+const test = base.extend<MyFixtures>({
   ...uiFixtures,
-  ...apiFixtures,
 });
-export { expect };
+
+export { test, expect };
