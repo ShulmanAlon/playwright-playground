@@ -1,11 +1,14 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { step } from '../../common/decorators/step';
+import { Product } from '../test-data/Product';
+import { ProductComponent } from '../../components/ProductComponent';
 
 export class InventoryPage {
   readonly page: Page;
   readonly burgerMenuButton: Locator;
   readonly logoutMenuButton: Locator;
   readonly closeMenuButton: Locator;
+  readonly openCartButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +21,7 @@ export class InventoryPage {
     this.closeMenuButton = this.page.getByRole('button', {
       name: 'Close Menu',
     });
+    this.openCartButton = this.page.locator('[data-test="shopping-cart-link"]');
   }
 
   @step()
@@ -41,5 +45,21 @@ export class InventoryPage {
   async verifySignedIn() {
     await this.burgerMenuButton.click();
     await expect(this.logoutMenuButton).toBeVisible();
+  }
+
+  @step()
+  async addProductToCart(productComponent: ProductComponent, product: Product) {
+    await productComponent.toggleCartButton();
+    product.inCart = true;
+  }
+
+  @step()
+  async verifyProduct(productComponent: ProductComponent, product: Product) {
+    await productComponent.assertMatchesProduct(product);
+  }
+
+  @step()
+  async openCart() {
+    await this.openCartButton.click();
   }
 }
