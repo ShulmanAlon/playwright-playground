@@ -25,7 +25,7 @@ export class CheckoutStepOnePage {
     await this.zipPostalInput.fill(user.zipPostal);
   }
 
-  @step()
+  @step('continue to finalize page')
   async openContinue() {
     await this.continueButton.click();
   }

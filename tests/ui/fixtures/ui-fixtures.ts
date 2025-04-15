@@ -3,6 +3,7 @@ import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutStepOnePage } from '../pages/CheckoutStepOnePage';
+import { CheckoutStepTwoPage } from '../pages/CheckoutStepTwoPage';
 
 export const uiFixtures = {
   loginPage: async (
@@ -28,5 +29,11 @@ export const uiFixtures = {
     use: (checkoutStepOnePage: CheckoutStepOnePage) => Promise<void>
   ) => {
     await use(new CheckoutStepOnePage(page));
+  },
+  checkoutStepTwoPage: async (
+    { page }: { page: Page },
+    use: (checkoutStepTwoPage: CheckoutStepTwoPage) => Promise<void>
+  ) => {
+    await use(new CheckoutStepTwoPage(page));
   },
 };

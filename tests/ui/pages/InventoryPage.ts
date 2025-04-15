@@ -2,6 +2,7 @@ import { Locator, Page, expect } from '@playwright/test';
 import { step } from '../../common/decorators/step';
 import { Product } from '../test-data/Product';
 import { ProductComponent } from '../../components/ProductComponent';
+import { Purchase } from '../test-data/Purchase';
 
 export class InventoryPage {
   readonly page: Page;
@@ -48,10 +49,19 @@ export class InventoryPage {
   }
 
   @step()
-  async addProductToCart(productComponent: ProductComponent, product: Product) {
+  async addProductToCart(
+    productComponent: ProductComponent,
+    product: Product,
+    purchase: Purchase
+  ) {
     await productComponent.toggleCartButton();
     product.inCart = true;
+    purchase.addProduct(product);
   }
+
+  // TODO: add remove product
+
+  // TODO: add quantity manipulation
 
   @step()
   async verifyProduct(productComponent: ProductComponent, product: Product) {
