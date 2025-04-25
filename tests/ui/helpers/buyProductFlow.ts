@@ -35,7 +35,7 @@ export async function buyProductFlow({
   await cartPage.verifyProduct(productComponent, product);
   await cartPage.openCheckout();
   await checkoutStepOnePage.fillCheckoutForm(user);
-  await checkoutStepOnePage.continueButton.click();
+  await checkoutStepOnePage.openContinue();
   await checkoutStepTwoPage.verifyPurchaseDetails(purchase);
   await checkoutStepTwoPage.openFinish();
   await checkoutStepTwoPage.verifyOrderDone();
