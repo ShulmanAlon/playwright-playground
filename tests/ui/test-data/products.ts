@@ -8,4 +8,11 @@ export const products = {
     29.99,
     false
   ),
+  bikeLight: new Product(
+    'sauce-labs-bike-light',
+    'Sauce Labs Bike Light',
+    `A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.`,
+    9.99,
+    false
+  ),
 };

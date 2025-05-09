@@ -6,4 +6,8 @@ export class User {
     public lastname?: string,
     public zipPostal?: string
   ) {}
+
+  get fullname(): string {
+    return `${this.firstname} ${this.lastname}`;
+  }
 }
