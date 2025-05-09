@@ -1,8 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { step } from '../../common/decorators/step';
-import { Product } from '../test-data/Product';
-import { ProductComponent } from '../../components/ProductComponent';
 import { Purchase } from '../test-data/Purchase';
+import { ProductState } from '../test-data/ProductState';
 
 export class InventoryPage {
   readonly page: Page;
@@ -49,23 +48,17 @@ export class InventoryPage {
   }
 
   @step()
-  async addProductToCart(
-    productComponent: ProductComponent,
-    product: Product,
-    purchase: Purchase
-  ) {
-    await productComponent.toggleCartButton();
-    product.inCart = true;
-    purchase.addProduct(product);
+  async addProductToCart(productState: ProductState, purchase: Purchase) {
+    await productState.productComponent.toggleCartButton();
+    productState.expectedInCart = true;
+    purchase.addProduct(productState);
   }
 
-  // TODO: add remove product
-
-  // TODO: add quantity manipulation
-
   @step()
-  async verifyProduct(productComponent: ProductComponent, product: Product) {
-    await productComponent.assertMatchesProduct(product);
+  async verifyProduct(productState: ProductState) {
+    await productState.productComponent.assertMatchesProduct(
+      productState.product
+    );
   }
 
   @step()

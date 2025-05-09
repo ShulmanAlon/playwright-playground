@@ -1,10 +1,18 @@
-import { Product } from './Product';
+import { ProductState } from './ProductState';
 
 export class PurchaseItem {
-  constructor(public product: Product, public quantity: number = 1) {}
+  constructor(public state: ProductState, public quantity: number = 1) {}
+
+  get unitPrice(): number {
+    return this.state.updatedPrice ?? this.state.product.price;
+  }
 
   get subtotal(): number {
-    return this.product.price * this.quantity;
+    return this.unitPrice * this.quantity;
+  }
+
+  get title(): string {
+    return this.state.product.title;
   }
 }
 
@@ -13,17 +21,17 @@ export class Purchase {
 
   constructor(public taxRate: number = 0.08) {} // TODO: move to static file, default 8% tax
 
-  addProduct(product: Product): void {
-    const key = product.title;
+  addProduct(state: ProductState): void {
+    const key = state.product.title;
     if (this.items.has(key)) {
       this.items.get(key)!.quantity += 1;
     } else {
-      this.items.set(key, new PurchaseItem(product));
+      this.items.set(key, new PurchaseItem(state));
     }
   }
 
-  removeProduct(product: Product): void {
-    const key = product.title;
+  removeProduct(state: ProductState): void {
+    const key = state.product.title;
     const item = this.items.get(key);
     if (item) {
       if (item.quantity > 1) {
@@ -53,15 +61,12 @@ export class Purchase {
     return Array.from(this.items.values());
   }
 
-  getQuantityForProduct(product: Product) {
-    const key = product.title;
-    if (this.items.has(key)) {
-      return this.items.get(key)?.quantity;
-    }
-    return 0;
+  getQuantityForProduct(state: ProductState): number {
+    const key = state.product.title;
+    return this.items.get(key)?.quantity ?? 0;
   }
 
-  clear() {
-    this.items = new Map();
+  clear(): void {
+    this.items.clear();
   }
 }

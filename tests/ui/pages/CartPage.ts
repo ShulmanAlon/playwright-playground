@@ -1,7 +1,6 @@
 import { Locator, Page } from 'playwright/test';
 import { step } from '../../common/decorators/step';
-import { ProductComponent } from '../../components/ProductComponent';
-import { Product } from '../test-data/Product';
+import { ProductState } from '../test-data/ProductState';
 
 export class CartPage {
   readonly checkoutButton: Locator;
@@ -11,8 +10,10 @@ export class CartPage {
   }
 
   @step()
-  async verifyProduct(productComponent: ProductComponent, product: Product) {
-    await productComponent.assertMatchesProduct(product);
+  async verifyProduct(productState: ProductState) {
+    await productState.productComponent.assertMatchesProduct(
+      productState.product
+    );
   }
 
   @step()

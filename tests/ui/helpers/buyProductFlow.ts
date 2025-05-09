@@ -1,19 +1,17 @@
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
-import { Product } from '../test-data/Product';
-import { ProductComponent } from '../../components/ProductComponent';
 import { CheckoutStepOnePage } from '../pages/CheckoutStepOnePage';
 import { CheckoutStepTwoPage } from '../pages/CheckoutStepTwoPage';
 import { User } from '../test-data/User';
 import { Purchase } from '../test-data/Purchase';
+import { ProductState } from '../test-data/ProductState';
 
 type BuyProductArgs = {
   inventoryPage: InventoryPage;
   cartPage: CartPage;
   checkoutStepOnePage: CheckoutStepOnePage;
   checkoutStepTwoPage: CheckoutStepTwoPage;
-  productComponent: ProductComponent;
-  product: Product;
+  productState: ProductState;
   user: User;
   purchase: Purchase;
 };
@@ -23,16 +21,15 @@ export async function buyProductFlow({
   cartPage,
   checkoutStepOnePage,
   checkoutStepTwoPage,
-  productComponent,
-  product,
+  productState,
   user,
   purchase,
 }: BuyProductArgs) {
-  await inventoryPage.verifyProduct(productComponent, product);
-  await inventoryPage.addProductToCart(productComponent, product, purchase);
-  await inventoryPage.verifyProduct(productComponent, product);
+  await inventoryPage.verifyProduct(productState);
+  await inventoryPage.addProductToCart(productState, purchase);
+  await inventoryPage.verifyProduct(productState);
   await inventoryPage.openCart();
-  await cartPage.verifyProduct(productComponent, product);
+  await cartPage.verifyProduct(productState);
   await cartPage.openCheckout();
   await checkoutStepOnePage.fillCheckoutForm(user);
   await checkoutStepOnePage.openContinue();
@@ -42,12 +39,12 @@ export async function buyProductFlow({
 }
 
 // TODO can merge to one function that allows single or multiple products
-export type BuyMultProductsArgs = {
+type BuyMultProductsArgs = {
   inventoryPage: InventoryPage;
   cartPage: CartPage;
   checkoutStepOnePage: CheckoutStepOnePage;
   checkoutStepTwoPage: CheckoutStepTwoPage;
-  productPairs: [Product, ProductComponent][];
+  productsStates: ProductState[];
   user: User;
   purchase: Purchase;
 };
@@ -57,18 +54,18 @@ export async function buyMultProductsFlow({
   cartPage,
   checkoutStepOnePage,
   checkoutStepTwoPage,
-  productPairs,
+  productsStates,
   user,
   purchase,
 }: BuyMultProductsArgs) {
-  for (const [product, productComponent] of productPairs) {
-    await inventoryPage.verifyProduct(productComponent, product);
-    await inventoryPage.addProductToCart(productComponent, product, purchase);
-    await inventoryPage.verifyProduct(productComponent, product);
+  for (const productState of productsStates) {
+    await inventoryPage.verifyProduct(productState);
+    await inventoryPage.addProductToCart(productState, purchase);
+    await inventoryPage.verifyProduct(productState);
   }
   await inventoryPage.openCart();
-  for (const [product, productComponent] of productPairs) {
-    await cartPage.verifyProduct(productComponent, product);
+  for (const productState of productsStates) {
+    await cartPage.verifyProduct(productState);
   }
   await cartPage.openCheckout();
   await checkoutStepOnePage.fillCheckoutForm(user);

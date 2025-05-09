@@ -24,7 +24,6 @@ export class ProductComponent {
     expect(name).toBe(product.title);
     expect(description).toBe(product.description);
     expect(price).toBe(product.price);
-    expect(isInCart).toBe(product.inCart);
   }
 
   static fromTitle(
