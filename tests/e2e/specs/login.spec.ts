@@ -1,8 +1,12 @@
-import { test, expect } from '../../common/fixtures/fixtures';
+import { test } from '../../common/fixtures/fixtures';
 import { loginFlow } from '../helpers/loginFlow';
 import { loginUsers } from '../test-data/users';
 
 test.describe('login tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
   test('Successful login with valid user', async ({
     page,
     loginPage,

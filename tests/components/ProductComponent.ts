@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from '@playwright/test';
-import { Product } from '../ui/test-data/Product';
+import { ProductState } from '../e2e/test-data/ProductState';
 
 export class ProductComponent {
   readonly locator: Locator;
@@ -8,7 +8,7 @@ export class ProductComponent {
     this.locator = locator;
   }
 
-  async assertMatchesProduct(product: Product) {
+  async assertMatchesProduct(productState: ProductState) {
     const name = await this.locator
       .locator('[data-test="inventory-item-name"]')
       .innerText();
@@ -21,16 +21,17 @@ export class ProductComponent {
     const price = parseFloat(priceText.replace('$', ''));
     const isInCart = await this.isInCart();
 
-    expect(name).toBe(product.title);
-    expect(description).toBe(product.description);
-    expect(price).toBe(product.price);
+    expect(name).toBe(productState.product.title);
+    expect(description).toBe(productState.product.description);
+    expect(price).toBe(productState.product.price);
+    expect(isInCart).toBe(productState.expectedInCart ?? false);
   }
 
   static fromTitle(
     scope: Page | Locator,
     productTitle: string
   ): ProductComponent {
-    const rootLocator = scope
+    const rootLocator = scope // limitation of site used, no data-test or other better solution
       .locator('[data-test="inventory-item-name"]', { hasText: productTitle })
       .locator('..') // item label
       .locator('..') // inventory_item_description

@@ -9,7 +9,6 @@ type LoginFlowArgs = {
 };
 
 export async function loginFlow({ page, loginPage, user }: LoginFlowArgs) {
-  await page.goto('/');
   await loginPage.verifyLanding();
   await loginPage.fillCredentials(user);
   await loginPage.submit();

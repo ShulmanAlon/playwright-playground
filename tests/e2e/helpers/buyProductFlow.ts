@@ -39,7 +39,7 @@ export async function buyProductFlow({
 }
 
 // TODO can merge to one function that allows single or multiple products
-type BuyMultProductsArgs = {
+type BuyMultipleProductsArgs = {
   inventoryPage: InventoryPage;
   cartPage: CartPage;
   checkoutStepOnePage: CheckoutStepOnePage;
@@ -49,7 +49,7 @@ type BuyMultProductsArgs = {
   purchase: Purchase;
 };
 
-export async function buyMultProductsFlow({
+export async function buyMultipleProductsFlow({
   inventoryPage,
   cartPage,
   checkoutStepOnePage,
@@ -57,7 +57,7 @@ export async function buyMultProductsFlow({
   productsStates,
   user,
   purchase,
-}: BuyMultProductsArgs) {
+}: BuyMultipleProductsArgs) {
   for (const productState of productsStates) {
     await inventoryPage.verifyProduct(productState);
     await inventoryPage.addProductToCart(productState, purchase);

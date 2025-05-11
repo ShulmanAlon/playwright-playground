@@ -11,9 +11,7 @@ export class CartPage {
 
   @step()
   async verifyProduct(productState: ProductState) {
-    await productState.productComponent.assertMatchesProduct(
-      productState.product
-    );
+    await productState.productComponent.assertMatchesProduct(productState);
   }
 
   @step()

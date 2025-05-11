@@ -3,12 +3,18 @@ import { loginFlow } from '../helpers/loginFlow';
 import { loginUsers } from '../test-data/users';
 import { products } from '../test-data/products';
 import { ProductComponent } from '../../components/ProductComponent';
-import { buyMultProductsFlow, buyProductFlow } from '../helpers/buyProductFlow';
+import {
+  buyMultipleProductsFlow,
+  buyProductFlow,
+} from '../helpers/buyProductFlow';
 import { Purchase } from '../test-data/Purchase';
-import { Product } from '../test-data/Product';
 import { ProductState } from '../test-data/ProductState';
 
 test.describe('product purchase process', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
   test('Full single product purchase flow process', async ({
     page,
     loginPage,
@@ -67,7 +73,7 @@ test.describe('product purchase process', () => {
     const purchase = new Purchase();
 
     await loginFlow({ page, loginPage, user });
-    await buyMultProductsFlow({
+    await buyMultipleProductsFlow({
       inventoryPage,
       cartPage,
       checkoutStepOnePage,
