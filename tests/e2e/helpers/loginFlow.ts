@@ -1,14 +1,19 @@
-import { Page } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { User } from '../test-data/User';
 
 type LoginFlowArgs = {
-  page: Page;
   loginPage: LoginPage;
   user: User;
 };
 
-export async function loginFlow({ page, loginPage, user }: LoginFlowArgs) {
+/**
+ * Executes the login phase from the log in page and finishes in inventory
+ *
+ * Requires browser is open and in landing page url beforehand
+ *
+ * @param args - See 'LoginFlowArgs' for full structure.
+ */
+export async function loginFlow({ loginPage, user }: LoginFlowArgs) {
   await loginPage.verifyLanding();
   await loginPage.fillCredentials(user);
   await loginPage.submit();

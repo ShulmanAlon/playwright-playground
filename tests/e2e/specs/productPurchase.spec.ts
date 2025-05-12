@@ -33,7 +33,7 @@ test.describe('product purchase process', () => {
     const user = loginUsers.fullUser;
     const purchase = new Purchase();
 
-    await loginFlow({ page, loginPage, user });
+    await loginFlow({ loginPage, user });
     await buyProductFlow({
       inventoryPage,
       cartPage,
@@ -72,7 +72,7 @@ test.describe('product purchase process', () => {
     const user = loginUsers.fullUser;
     const purchase = new Purchase();
 
-    await loginFlow({ page, loginPage, user });
+    await loginFlow({ loginPage, user });
     await buyMultipleProductsFlow({
       inventoryPage,
       cartPage,

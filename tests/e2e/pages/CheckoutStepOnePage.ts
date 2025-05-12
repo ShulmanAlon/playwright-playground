@@ -15,7 +15,7 @@ export class CheckoutStepOnePage {
     this.zipPostalInput = this.page.locator('[data-test="postalCode"]');
   }
 
-  @step()
+  @step("fill the user's details in the checkout page form")
   async fillCheckoutForm(user: User) {
     if (!user.firstname || !user.lastname || !user.zipPostal) {
       throw new Error('Missing required user information for checkout.');
@@ -25,7 +25,7 @@ export class CheckoutStepOnePage {
     await this.zipPostalInput.fill(user.zipPostal);
   }
 
-  @step()
+  @step('click on the continue page to navigate to checkout step 2 page')
   async openContinue() {
     await this.continueButton.click();
   }

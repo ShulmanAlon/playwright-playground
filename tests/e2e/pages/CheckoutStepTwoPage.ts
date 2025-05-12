@@ -17,24 +17,30 @@ export class CheckoutStepTwoPage {
     this.cancelButton = this.page.locator('[data-test="cancel"]');
   }
 
-  @step()
+  @step(
+    'click on the finish button to finish the purchase and view the final message'
+  )
   async openFinish() {
     await this.finishButton.click();
   }
 
-  @step()
+  @step('press on cancel button') // TODO add functionality explanation if used
   async cancel() {
     await this.cancelButton.click();
   }
 
-  @step()
+  @step(
+    'verify the purchase detail match the calculated purchase object, icluding subtotal, tax and total sum'
+  )
   async verifyPurchaseDetails(purchase: Purchase) {
     expect(this.subTotal).toHaveText('Item total: $' + purchase.subtotal);
     expect(this.purchaseTax).toHaveText('Tax: $' + purchase.tax.toFixed(2));
     expect(this.totalSum).toHaveText('Total: $' + purchase.total.toFixed(2));
   }
 
-  @step()
+  @step(
+    'verify order has been successfully finished, checking by ARIA snapshot'
+  )
   async verifyOrderDone() {
     await expect(this.page.locator('[data-test="checkout-complete-container"]'))
       .toMatchAriaSnapshot(`

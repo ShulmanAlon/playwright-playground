@@ -12,7 +12,7 @@ test.describe('login tests', () => {
     loginPage,
     inventoryPage,
   }) => {
-    await loginFlow({ page, loginPage, user: loginUsers.validUser });
+    await loginFlow({ loginPage, user: loginUsers.validUser });
     await inventoryPage.verifySignedIn();
   });
 
@@ -20,7 +20,7 @@ test.describe('login tests', () => {
     page,
     loginPage,
   }) => {
-    await loginFlow({ page, loginPage, user: loginUsers.invalidUser });
+    await loginFlow({ loginPage, user: loginUsers.invalidUser });
     await loginPage.verifyInvalidLogin();
   });
 });

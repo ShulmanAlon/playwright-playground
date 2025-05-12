@@ -16,6 +16,13 @@ type BuyProductArgs = {
   purchase: Purchase;
 };
 
+/**
+ * Executes the full purchase flow for a single product from inventory to order completion.
+ *
+ * This includes verifying inventory, adding to cart, checkout, and order confirmation.
+ *
+ * @param args - See `BuyProductArgs` for full structure.
+ */
 export async function buyProductFlow({
   inventoryPage,
   cartPage,
@@ -49,6 +56,13 @@ type BuyMultipleProductsArgs = {
   purchase: Purchase;
 };
 
+/**
+ * Executes the full purchase flow for multiple products from inventory to order completion.
+ *
+ * This includes verifying inventory, adding to cart, checkout, and order confirmation.
+ *
+ * @param args - See `BuyMultipleProductsArgs` for full structure.
+ */
 export async function buyMultipleProductsFlow({
   inventoryPage,
   cartPage,

@@ -15,24 +15,24 @@ export class LoginPage {
     this.loginButton = this.page.locator('[data-test="login-button"]');
   }
 
-  @step()
+  @step("fills specified user user's username and password in form")
   async fillCredentials(user: User) {
     await this.usernameInput.fill(user.username);
     await this.passwordInput.fill(user.password);
   }
 
-  @step()
+  @step('submits the log-in form')
   async submit() {
     await this.loginButton.click();
   }
 
-  @step()
+  @step('fills the user credentials and clicks submit to log-in')
   async login(user: User) {
     await this.fillCredentials(user);
     await this.submit();
   }
 
-  @step()
+  @step('verify the landing page using ARIA snapshots')
   async verifyLanding() {
     await expect(this.page.locator('#root')).toMatchAriaSnapshot(
       `- text: Swag Labs`
@@ -45,7 +45,9 @@ export class LoginPage {
       `);
   }
 
-  @step()
+  @step(
+    'verify that if user had invalid login attempt the client displays correct message using the ARIA snapshot'
+  )
   async verifyInvalidLogin() {
     await expect(this.page.locator('form')).toMatchAriaSnapshot(`
       - 'heading "Epic sadface: Username and password do not match any user in this service" [level=3]':

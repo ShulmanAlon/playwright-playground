@@ -8,6 +8,12 @@ export class ProductComponent {
     this.locator = locator;
   }
 
+  /**
+   * verifies that the specified product matches the product in the client, including if it is currently in cart or not
+   * due to the site behavior, this can be done on multiple pages and not just inventory
+   *
+   * @param {ProductState} productState - wrapper of Product, ProductComponent, with additional optional properties
+   */
   async assertMatchesProduct(productState: ProductState) {
     const name = await this.locator
       .locator('[data-test="inventory-item-name"]')

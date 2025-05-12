@@ -24,7 +24,7 @@ export class InventoryPage {
     this.openCartButton = this.page.locator('[data-test="shopping-cart-link"]');
   }
 
-  @step()
+  @step('verify the landing page using ARIA snapshots')
   async verifyLanding() {
     // using ARIA snapshot
     await expect(
@@ -41,25 +41,31 @@ export class InventoryPage {
     `);
   }
 
-  @step()
+  @step(
+    'verify the user is signed in by opening the side menu and confirming the "logout" button to be visible'
+  )
   async verifySignedIn() {
     await this.burgerMenuButton.click();
     await expect(this.logoutMenuButton).toBeVisible();
   }
 
-  @step()
+  @step(
+    'adds specified product to cart by clicking. updates purchase object and productState expectedInCart property'
+  )
   async addProductToCart(productState: ProductState, purchase: Purchase) {
     await productState.productComponent.toggleCartButton();
     productState.expectedInCart = true;
     purchase.addProduct(productState);
   }
 
-  @step()
+  @step(
+    'verifies the specified product matches the client product by its properties, including checking if it is in cart or not'
+  )
   async verifyProduct(productState: ProductState) {
     await productState.productComponent.assertMatchesProduct(productState);
   }
 
-  @step()
+  @step('click on the open cart button to open the cart page')
   async openCart() {
     await this.openCartButton.click();
   }
