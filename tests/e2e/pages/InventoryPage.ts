@@ -50,7 +50,7 @@ export class InventoryPage {
   }
 
   @step(
-    'adds specified product to cart by clicking. updates purchase object and productState expectedInCart property'
+    'add specified product to cart by clicking. updates purchase object and productState expectedInCart property'
   )
   async addProductToCart(productState: ProductState, purchase: Purchase) {
     await productState.productComponent.toggleCartButton();
@@ -59,7 +59,7 @@ export class InventoryPage {
   }
 
   @step(
-    'verifies the specified product matches the client product by its properties, including checking if it is in cart or not'
+    'verify the specified product matches the client product by its properties, including checking if it is in cart or not'
   )
   async verifyProduct(productState: ProductState) {
     await productState.productComponent.assertMatchesProduct(productState);

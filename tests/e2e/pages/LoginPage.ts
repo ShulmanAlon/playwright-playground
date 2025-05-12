@@ -15,18 +15,18 @@ export class LoginPage {
     this.loginButton = this.page.locator('[data-test="login-button"]');
   }
 
-  @step("fills specified user user's username and password in form")
+  @step("fill specified user's username and password in form")
   async fillCredentials(user: User) {
     await this.usernameInput.fill(user.username);
     await this.passwordInput.fill(user.password);
   }
 
-  @step('submits the log-in form')
+  @step('submit the log-in form')
   async submit() {
     await this.loginButton.click();
   }
 
-  @step('fills the user credentials and clicks submit to log-in')
+  @step('fill the user credentials and clicks submit to log-in')
   async login(user: User) {
     await this.fillCredentials(user);
     await this.submit();

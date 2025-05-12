@@ -94,6 +94,5 @@ test.describe('API tests', () => {
   test('API delete of post', async ({ request }) => {
     const response = await request.delete(`${apiBase}/posts/1`);
     await expect(response).toBeOK();
-    const body = await response.json();
   });
 });

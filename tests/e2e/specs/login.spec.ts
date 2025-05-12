@@ -8,7 +8,6 @@ test.describe('login tests', () => {
   });
 
   test('Successful login with valid user', async ({
-    page,
     loginPage,
     inventoryPage,
   }) => {
@@ -16,10 +15,7 @@ test.describe('login tests', () => {
     await inventoryPage.verifySignedIn();
   });
 
-  test('Invalid user login with wrong password', async ({
-    page,
-    loginPage,
-  }) => {
+  test('Invalid user login with wrong password', async ({ loginPage }) => {
     await loginFlow({ loginPage, user: loginUsers.invalidUser });
     await loginPage.verifyInvalidLogin();
   });

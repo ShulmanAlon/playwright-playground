@@ -10,7 +10,7 @@ export class CartPage {
   }
 
   @step(
-    'verifies the specified product matches the client product by its properties, including checking if it is in cart or not'
+    'verify the specified product matches the client product by its properties, including checking if it is in cart or not'
   )
   async verifyProduct(productState: ProductState) {
     await productState.productComponent.assertMatchesProduct(productState);
