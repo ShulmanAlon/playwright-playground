@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test';
+import test, { Locator, Page, expect } from '@playwright/test';
 import { step } from '../../common/decorators/step';
 import { Purchase } from '../test-data/Purchase';
 import { ProductState } from '../test-data/ProductState';
@@ -50,19 +50,23 @@ export class InventoryPage {
   }
 
   @step(
-    'add specified product to cart by clicking. updates purchase object and productState expectedInCart property'
+    `add specified product - to cart by clicking. updates purchase object and productState expectedInCart property`
   )
   async addProductToCart(productState: ProductState, purchase: Purchase) {
-    await productState.productComponent.toggleCartButton();
-    productState.expectedInCart = true;
-    purchase.addProduct(productState);
+    await test.step(`Add product - ${productState.product.title}`, async () => {
+      await productState.productComponent.toggleCartButton();
+      productState.expectedInCart = true;
+      purchase.addProduct(productState);
+    });
   }
 
   @step(
     'verify the specified product matches the client product by its properties, including checking if it is in cart or not'
   )
   async verifyProduct(productState: ProductState) {
-    await productState.productComponent.assertMatchesProduct(productState);
+    await test.step(`verify product - ${productState.product.title}`, async () => {
+      await productState.productComponent.assertMatchesProduct(productState);
+    });
   }
 
   @step('click on the open cart button to open the cart page')
