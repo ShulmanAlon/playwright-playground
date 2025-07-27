@@ -10,8 +10,6 @@ test.describe('API tests', () => {
     const response = await request.get(`${apiBase}/todos/1`);
     await expect(response).toBeOK();
     const body = await response.json();
-
-    await expect(response).toBeOK();
     expect(body).toMatchObject({
       userId: 1,
       id: 1,
@@ -40,11 +38,12 @@ test.describe('API tests', () => {
 
   step();
   test('API post of post using match object', async ({ request }) => {
-    const payload = { data: { title: 'foo', bar: 'bar' } };
+    const testData = { title: 'foo', bar: 'bar' };
+    const payload = { data: { testData } };
     const response = await request.post(`${apiBase}/posts`, payload);
     await expect(response).toBeOK();
     const body = await response.json();
-    expect(body).toMatchObject({ title: 'foo', bar: 'bar', id: 101 });
+    expect(body).toMatchObject({ testData, id: 101 });
   });
 
   step();

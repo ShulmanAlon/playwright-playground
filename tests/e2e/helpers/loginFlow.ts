@@ -9,7 +9,7 @@ type LoginFlowArgs = {
 /**
  * Executes the login phase from the log in page and finishes in inventory
  *
- * Requires browser is open and in landing page url beforehand
+ * Requires browser to be open and in landing page url beforehand
  *
  * @param args - See 'LoginFlowArgs' for full structure.
  */
